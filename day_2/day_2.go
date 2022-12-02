@@ -8,8 +8,9 @@ import (
 )
 
 var (
-	total, point, firstTotal, strategyTotal = 0, 0, 0, 0
-	delim                                   = " "
+	total, strategyTotal, point = 0, 0, 0
+	delim                       = " "
+	rival                       = ""
 )
 
 const (
@@ -18,8 +19,6 @@ const (
 	SCISSOR, DRAW = 3, 3
 	WIN           = 6
 	LOSE, idx0    = 0, 0
-	STRATEGY      = "strategy"
-	NORMAL        = "normal"
 )
 
 func main() {
@@ -41,32 +40,19 @@ func main() {
 	readFile.Close()
 
 	for _, op := range fileLines {
-		firstTotal += rockPaperScissor(strings.Split(op, delim), NORMAL)
-		strategyTotal += rockPaperScissor(strings.Split(op, delim), STRATEGY)
+		newOp := strings.Split(op, delim)
+		total += rockPaperScissor(newOp)
+		strategyTotal += strategyGuider(newOp)
 	}
 	// Part 1
-	fmt.Printf("The winning total is: %d", firstTotal)
-
+	fmt.Printf("The winning total is: %d", total)
+	fmt.Println()
 	// Part 2
 	fmt.Printf("The strategy guide total is: %d", strategyTotal)
 }
 
-func swapElements(op []string, idx0, idx1 int) []string {
-	temp := op[idx0]
-	op[idx0] = op[idx1]
-	op[idx1] = temp
-	return op
-}
-
-func rockPaperScissor(op []string, condition string) (result int) {
-	var rival string
-	swapCondition := op[1]
-	if condition == STRATEGY {
-		swapElements(op, idx0, idx1)
-		swapCondition = op[0]
-	}
-
-	switch swapCondition {
+func rockPaperScissor(op []string) (result int) {
+	switch op[1] {
 	case "X":
 		rival = "A"
 		point = ROCK
@@ -87,4 +73,51 @@ func rockPaperScissor(op []string, condition string) (result int) {
 	} else {
 		return 0
 	}
+}
+
+func strategyGuider(op []string) int {
+	shapeValue := 0
+	switch op[1] {
+	case "X":
+		point = LOSE
+	case "Y":
+		point = DRAW
+	case "Z":
+		point = WIN
+	}
+
+	// ROCK
+	if op[0] == "A" {
+		if point == LOSE {
+			shapeValue = SCISSOR
+		} else if point == DRAW {
+			shapeValue = ROCK
+		} else if point == WIN {
+			shapeValue = PAPER
+		}
+	}
+
+	// PAPER
+	if op[0] == "B" {
+		if point == LOSE {
+			shapeValue = ROCK
+		} else if point == DRAW {
+			shapeValue = PAPER
+		} else if point == WIN {
+			shapeValue = SCISSOR
+		}
+	}
+
+	// SCISSOR
+	if op[0] == "C" {
+		if point == LOSE {
+			shapeValue = PAPER
+		} else if point == DRAW {
+			shapeValue = SCISSOR
+		} else if point == WIN {
+			shapeValue = ROCK
+		}
+	}
+
+	return shapeValue + point
 }
