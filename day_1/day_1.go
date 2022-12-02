@@ -30,17 +30,15 @@ func main() {
 
 	total := 0
 	for _, line := range fileLines {
-		if line == 0 {
-			totalCalories = append(totalCalories, total)
-			total = 0
-		} else {
+		if line != 0 {
 			total += line
+			continue
 		}
+		totalCalories = append(totalCalories, total)
+		total = 0
 	}
 
-	sort.Ints(totalCalories)
-
-	// Part 1
+	sort.Ints(totalCalories) // Part 1
 	fmt.Println("Elf with highest calories:", totalCalories[len(totalCalories)-1])
 
 	// Part 2
