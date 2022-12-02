@@ -1,4 +1,3 @@
-
 package main
 
 import (
@@ -9,10 +8,8 @@ import (
 	"strconv"
 )
 
-const filePath = "inputs/day_1.txt"
-
 func main() {
-	//filePath := os.Args[1]
+	filePath := os.Args[1]
 	readFile, err := os.Open(filePath)
 
 	if err != nil {
