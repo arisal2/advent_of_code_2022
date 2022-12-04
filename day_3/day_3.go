@@ -8,7 +8,7 @@ import (
 
 func main() {
 	var (
-		mid, end, total = 0, 0, 0
+		mid, end, total, groupTotal = 0, 0, 0, 0
 	)
 
 	fileLines := fr.Reader()
@@ -23,7 +23,7 @@ func main() {
 	fmt.Printf("The priority total is: %d", total)
 
 	// PART 2
-	//fmt.Printf("The group total is: %d", groupTotal)
+	fmt.Printf("The group total is: %d", groupTotal)
 }
 
 func compareRucksacks(ruckSackFirst, ruckSackSecond string) (result int) {
