@@ -1,34 +1,17 @@
 package main
 
 import (
-	"bufio"
+	fr "advent-of-code/fileReader"
 	"fmt"
-	"os"
 	"unicode"
 )
 
-var (
-	mid, end, total = 0, 0, 0
-)
-
 func main() {
-	//filePath := os.Args[1]
-	filePath := "day_3.txt"
-	readFile, err := os.Open(filePath)
+	var (
+		mid, end, total = 0, 0, 0
+	)
 
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fileScanner := bufio.NewScanner(readFile)
-	fileScanner.Split(bufio.ScanLines)
-	var fileLines []string
-
-	for fileScanner.Scan() {
-		fileLines = append(fileLines, fileScanner.Text())
-	}
-
-	readFile.Close()
+	fileLines := fr.Reader()
 
 	for _, lines := range fileLines {
 		mid = (len(lines) / 2) - 1
@@ -55,7 +38,6 @@ func compareRucksacks(ruckSackFirst, ruckSackSecond string) (result int) {
 				break
 			}
 		}
-		
 	}
 	return
 }

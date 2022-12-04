@@ -1,9 +1,8 @@
 package main
 
 import (
-	"bufio"
+	fr "advent-of-code/fileReader"
 	"fmt"
-	"os"
 	"strings"
 )
 
@@ -22,22 +21,7 @@ const (
 )
 
 func main() {
-	filePath := os.Args[1]
-	readFile, err := os.Open(filePath)
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fileScanner := bufio.NewScanner(readFile)
-	fileScanner.Split(bufio.ScanLines)
-	var fileLines []string
-
-	for fileScanner.Scan() {
-		fileLines = append(fileLines, fileScanner.Text())
-	}
-
-	readFile.Close()
+	fileLines := fr.Reader()
 
 	for _, op := range fileLines {
 		newOp := strings.Split(op, delim)

@@ -1,37 +1,23 @@
 package main
 
 import (
-	"bufio"
+	fr "advent-of-code/fileReader"
 	"fmt"
-	"os"
 	"sort"
 	"strconv"
 )
 
 func main() {
-	filePath := os.Args[1]
-	readFile, err := os.Open(filePath)
-
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	fileScanner := bufio.NewScanner(readFile)
-	fileScanner.Split(bufio.ScanLines)
-	var fileLines []int
+	var total, convertedLine int
 	var totalCalories []int
+	
+	fileLines := fr.Reader()
 
-	for fileScanner.Scan() {
-		convertedValue, _ := strconv.Atoi(fileScanner.Text())
-		fileLines = append(fileLines, convertedValue)
-	}
-
-	readFile.Close()
-
-	total := 0
 	for _, line := range fileLines {
-		if line != 0 {
-			total += line
+		fmt.Println(line)
+		convertedLine, _ = strconv.Atoi(line)
+		if convertedLine != 0 {
+			total += convertedLine
 			continue
 		}
 		totalCalories = append(totalCalories, total)
