@@ -46,18 +46,18 @@ func compareRucksacks(rsOne, rsTwo string) (result int) {
 	return
 }
 
-func sortString(w string) string {
-	s := strings.Split(w, "")
-	sort.Strings(s)
-	return strings.Join(s, "")
-}
-
 func checkUnicode(first rune) (result int) {
 	if unicode.IsUpper(first) {
 		return (int(first) + 27) - 65
 	} else {
 		return int(first) - 96
 	}
+}
+
+func sortString(w string) string {
+	s := strings.Split(w, "")
+	sort.Strings(s)
+	return strings.Join(s, "")
 }
 
 func findCommon(rsOne, rsTwo, rsThree string) (result int) {
@@ -79,4 +79,3 @@ func findCommon(rsOne, rsTwo, rsThree string) (result int) {
 
 	return
 }
-
