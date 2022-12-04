@@ -15,19 +15,19 @@ func main() {
 
 	fileLines := fr.Reader()
 
+	// PART 1
 	for _, lines := range fileLines {
 		mid = (len(lines) / 2)
 		end = len(lines)
 		total += compareRucksacks(lines[0:mid], lines[mid:end])
 	}
 
+	fmt.Printf("The priority total is: %d", total)
+	fmt.Println()
+
 	for i := 0; i < len(fileLines)-1; i = i + 3 {
 		groupTotal += findCommon(sortString(fileLines[i]), sortString(fileLines[i+1]), sortString(fileLines[i+2]))
 	}
-
-	// PART 1
-	fmt.Printf("The priority total is: %d", total)
-	fmt.Println()
 
 	// PART 2
 	fmt.Printf("The group total is: %d", groupTotal)
