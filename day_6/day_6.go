@@ -6,8 +6,6 @@ import (
 	"strings"
 )
 
-const ()
-
 func main() {
 	readLines := fr.Reader()
 	// PART 1
@@ -28,8 +26,7 @@ func checker(readLines []string, part int) (result int) {
 
 	for i = 0; i < len(readLines[0]); i++ {
 		compareArray := strings.Split(readLines[0][i:i+condition], "")
-		cleanedArray := removeDuplicates(compareArray)
-		if len(compareArray) == len(cleanedArray) {
+		if len(compareArray) == len(removeDuplicates(compareArray)) {
 			result = i + condition
 			break
 		}
